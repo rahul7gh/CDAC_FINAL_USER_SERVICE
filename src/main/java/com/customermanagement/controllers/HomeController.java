@@ -12,6 +12,7 @@ import com.customermanagement.config.ServiceConfig;
 import com.customermanagement.pojo.User;
 import com.customermanagement.service.IUserService;
 import com.customermanagement.service_communication.ProducService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class HomeController {
@@ -25,17 +26,19 @@ public class HomeController {
 	@Autowired
 	IUserService userService;
 
+	@Autowired
+	ObjectMapper mapper;
+	
 	@GetMapping("/")
 	public String hello()
 	{
 		return config.getProperty();
-//		+" "+service.hello() ;
 	}
 	
 	@PostMapping("/users")
 	public ResponseEntity<?> addNewUser(@RequestBody User newUser)
 	{
-		userService.addNewUser(newUser);
-		return ResponseEntity.ok("Created");
+		
+		return ResponseEntity.ok(userService.addNewUser(newUser));
 	}
 }
