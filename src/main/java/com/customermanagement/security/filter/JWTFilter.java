@@ -48,6 +48,9 @@ public class JWTFilter extends OncePerRequestFilter {
       if (null != username &&SecurityContextHolder.getContext().getAuthentication() == null) {
          UserDetails userDetails = userDetailsService.loadUserByUsername(username);
          if (tokenManager.validateJwtToken(token, userDetails)) {
+        	 
+        	 System.err.println("From Filter:- " + userDetails+" "+userDetails.getAuthorities());
+        	 
             UsernamePasswordAuthenticationToken
             authenticationToken = new UsernamePasswordAuthenticationToken(
             userDetails, null,
@@ -57,6 +60,7 @@ public class JWTFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
          }
       }
+      System.err.println("Yarr bhais");
       filterChain.doFilter(request, response);
    }
 }

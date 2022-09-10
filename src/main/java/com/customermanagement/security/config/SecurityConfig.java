@@ -39,7 +39,11 @@ public class SecurityConfig {
 		 * .httpBasic();
 		 */
 
-		http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated().and()
+		http.csrf().disable().authorizeRequests()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/users").permitAll()
+		.antMatchers("/validate-token").permitAll()
+		.anyRequest().authenticated().and()
 		.exceptionHandling()
 		.authenticationEntryPoint(authenticationEntryPoint)
 		.and()

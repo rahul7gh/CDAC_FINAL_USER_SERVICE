@@ -27,6 +27,7 @@ public class TokenManager implements Serializable {
       String username = getUsernameFromToken(token); 
       Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
       Boolean isTokenExpired = claims.getExpiration().before(new Date()); 
+      System.err.println(username+" "+userDetails.getUsername());
       return (username.equals(userDetails.getUsername()) && !isTokenExpired); 
    } 
    public String getUsernameFromToken(String token) {

@@ -18,6 +18,7 @@ Serializable {
    response,
    AuthenticationException authException) throws
    IOException, ServletException {
+	   System.err.println("OKEH");
       response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
    "Unauthorized");
       }
